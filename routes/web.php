@@ -13,7 +13,13 @@
 
 Route::get('/' , 'ReviewController@index')->name('index');
 
-
 Auth::routes();
+
+
+// ログインしている人だけがアクセスできるルーティンググループ
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::get('/review', 'ReviewController@create')->name('create');
+});
 
 Route::get('/home', 'HomeController@index')->name('home');
