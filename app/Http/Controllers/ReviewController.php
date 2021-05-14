@@ -8,7 +8,9 @@ use App\Review;
 class ReviewController extends Controller
 {
     public function index(){
-        return view('index');
+        $reviews = Review::where('status', 1)->orderBy('created_at', 'DESC')->paginate(9);
+
+        return view('index', compact('reviews'));
     }
 
     public function create()
